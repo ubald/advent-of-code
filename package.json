@@ -1,0 +1,51 @@
+{
+  "name": "advent-of-code",
+  "version": "1.0.0",
+  "description": "Avent of Code",
+  "license": "UNLICENSED",
+  "main": "main.js",
+  "scripts": {
+    "start": "ts-node src/main.ts",
+    "prettier": "prettier --check .",
+    "format": "prettier --write .",
+    "lint": "eslint \"src/**/*.{ts,js}\"",
+    "lint:ci": "npm run lint -- --quiet"
+  },
+  "dependencies": {
+    "axios": "^1.2.0",
+    "dotenv": "^16.0.3",
+    "source-map-support": "^0.5.21",
+    "typescript": "^4.8.4"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.6",
+    "@typescript-eslint/eslint-plugin": "^5.17.0",
+    "@typescript-eslint/parser": "^5.17.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-jest": "^24.4.0",
+    "prettier": "^2.7.1",
+    "ts-node": "^10.9.1"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": ".",
+    "globalSetup": "./jest.setup",
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    },
+    "collectCoverageFrom": [
+      "**/*.(t|j)s"
+    ],
+    "coverageDirectory": "./coverage",
+    "testEnvironment": "node",
+    "roots": [
+      "<rootDir>"
+    ]
+  }
+}

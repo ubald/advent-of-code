@@ -1,0 +1,96 @@
+module.exports = {
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    project: 'tsconfig.json',
+    sourceType: 'module',
+  },
+  plugins: ['@typescript-eslint'],
+  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'prettier'],
+  root: true,
+  env: {
+    node: true,
+    jest: true,
+  },
+  ignorePatterns: ['.eslintrc.js'],
+  rules: {
+    '@typescript-eslint/array-type': ['error', { default: 'generic' }],
+    '@typescript-eslint/consistent-type-assertions': ['error', { assertionStyle: 'as' }],
+    '@typescript-eslint/interface-name-prefix': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/method-signature-style': ['error'],
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-floating-promises': 'error',
+    '@typescript-eslint/no-for-in-array': 'error',
+    '@typescript-eslint/no-shadow': 'error',
+    '@typescript-eslint/no-misused-promises': 'error',
+    '@typescript-eslint/no-unused-vars': [
+      'warn',
+      {
+        vars: 'all',
+        args: 'after-used',
+        argsIgnorePattern: '^_',
+        ignoreRestSiblings: true,
+      },
+    ],
+    '@typescript-eslint/prefer-nullish-coalescing': 'warn',
+    '@typescript-eslint/prefer-optional-chain': 'warn',
+    '@typescript-eslint/prefer-readonly': 'warn',
+    'no-console': 'error',
+    'no-loss-of-precision': 'error',
+    'no-template-curly-in-string': 'error',
+    'no-unreachable-loop': 'error',
+    'no-unsafe-optional-chaining': ['error', { disallowArithmeticOperators: true }],
+    'require-atomic-updates': 'error',
+    'default-case': 'warn',
+    'default-case-last': 'error',
+    'default-param-last': 'error',
+    eqeqeq: 'error',
+    'grouped-accessor-pairs': 'error',
+    'no-implicit-coercion': 'error',
+    'no-invalid-this': 'error',
+    'no-param-reassign': 'error',
+    'no-return-assign': 'error',
+    'no-return-await': 'error',
+    'no-sequences': 'error',
+    'no-throw-literal': 'error',
+    'no-unused-expressions': 'error',
+    'no-useless-return': 'error',
+    'no-void': ['error', { allowAsStatement: true }],
+    'prefer-promise-reject-errors': 'error',
+    radix: 'error',
+    'require-await': 'error',
+    'no-var': 'error',
+    'prefer-const': 'error',
+  },
+  overrides: [
+    {
+      // Tests should use jest-specific rules as well as relax certain rules.
+      files: ['**/*.{spec,e2e-spec,suite,test.queries,scenario-builder}.{ts,js}'],
+      extends: ['plugin:jest/recommended', 'plugin:jest/style'],
+      env: {
+        jest: true,
+      },
+      plugins: ['jest'],
+      rules: {
+        '@typescript-eslint/no-non-null-assertion': 'off',
+        'jest/no-disabled-tests': 'warn',
+        'jest/no-focused-tests': 'error',
+        'jest/expect-expect': [
+          'error',
+          {
+            assertFunctionNames: ['expect', 'test*'],
+          },
+        ],
+      },
+    },
+    {
+      // Suite files are made to export suites of tests so we need to override
+      // certain otherwise useful rules.
+      files: ['**/*.suite.{ts,js}'],
+      rules: {
+        'jest/no-export': 'off',
+      },
+    },
+  ],
+};
