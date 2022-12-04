@@ -9,7 +9,7 @@ export async function main(): Promise<void> {
     Z: 'C',
   };
 
-  const rules: Record<string, [string, number, string]> = {
+  const rules: Record<string, [string, number]> = {
     A: ['C', 1],
     B: ['A', 2],
     C: ['B', 3],
