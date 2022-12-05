@@ -2,12 +2,13 @@ import { fetchPuzzle } from '../utils/puzzle';
 
 export async function main(): Promise<void> {
   const input = await fetchPuzzle('2022', '5');
+
   const [cratesInput, movesInput] = input.split('\n\n');
   const crateLines = cratesInput.split('\n').filter((line) => line.length);
   const moveLines = movesInput.split('\n').filter((line) => line.length);
 
   const CRATE_LEN = 4;
-  const pileCount = crateLines[0].length / CRATE_LEN;
+  const pileCount = Math.ceil(crateLines[0].length / CRATE_LEN);
 
   const makePiles = () => {
     const piles: Array<Array<string>> = [];
