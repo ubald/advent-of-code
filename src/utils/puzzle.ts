@@ -2,7 +2,7 @@ import axios from 'axios';
 import * as fs from 'fs';
 
 export const fetchPuzzle = async (year: string, day: string): Promise<string> => {
-  const filePath = `src/${year}-${day.padStart(2, '0')}/input.txt`;
+  const filePath = `src/${year}/${year}-${day.padStart(2, '0')}.txt`;
 
   if (!fs.existsSync(filePath)) {
     const fileURL = `https://adventofcode.com/${year}/day/${day}/input`;

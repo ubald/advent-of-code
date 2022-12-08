@@ -2,8 +2,9 @@ import 'source-map-support/register';
 import './utils/dotenv';
 
 if (require.main === module) {
+  const [year, day] = process.argv[2].split('-');
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  require(`./${process.argv[2]}/main`)
+  require(`./${year}/${year}-${day}`)
     .main()
     .then(() => {
       process.exit();
