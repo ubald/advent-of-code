@@ -51,7 +51,9 @@ export async function main(): Promise<void> {
     return visited;
   };
 
+  const createRope = (length: number) => new Array(length).fill(null).map(() => ({ x: 0, y: 0 }));
+
   // Output
-  console.log('Part 1:', doMoves(new Array(2).fill(null).map(() => ({ x: 0, y: 0 }))).size);
-  console.log('Part 2:', doMoves(new Array(10).fill(null).map(() => ({ x: 0, y: 0 }))).size);
+  console.log('Part 1:', doMoves(createRope(2)).size);
+  console.log('Part 2:', doMoves(createRope(10)).size);
 }
