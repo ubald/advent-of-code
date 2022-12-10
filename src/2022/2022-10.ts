@@ -13,7 +13,7 @@ export async function main(): Promise<void> {
     .map((line) => line.split(' '))
     .map(([op, arg]) => [op, parseInt(arg, 10)]);
 
-  let x_register = 1;
+  let register = 1;
 
   let cycle = 0;
   let programCounter = 0;
@@ -28,7 +28,7 @@ export async function main(): Promise<void> {
     cycle++;
 
     if (cycle === nextReport) {
-      const signalStrength = cycle * x_register;
+      const signalStrength = cycle * register;
       signalSum += signalStrength;
       nextReport += REPORT_CYCLES;
     }
@@ -42,7 +42,7 @@ export async function main(): Promise<void> {
 
       case 'addx':
         if (instructionCounter === 1) {
-          x_register += arg;
+          register += arg;
           programCounter++;
           instructionCounter = 0;
         } else {
@@ -52,7 +52,7 @@ export async function main(): Promise<void> {
     }
 
     const pos = cycle % LINE_WIDTH;
-    if (pos >= x_register - 1 && pos <= x_register + 1) {
+    if (pos >= register - 1 && pos <= register + 1) {
       screen[cycle] = '█';
     }
   }
