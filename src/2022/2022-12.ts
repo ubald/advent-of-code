@@ -1,21 +1,23 @@
 import { fetchPuzzle } from '../utils/puzzle';
 
-type Node = {
-  readonly edges: Array<Edge>;
+type Node<N = any> = {
+  readonly edges: Array<Edge<Node<N> & N>>;
 };
 
-type Edge = {
+type Edge<N extends Node = Node> = {
   readonly weight: number;
-  readonly target: TerrainNode;
+  readonly target: N;
 };
 
-type TerrainNode = Node & {
+type Terrain = {
   readonly x: number;
   readonly y: number;
   readonly z: number;
 };
 
-function reconstructPath(cameFrom: Map<TerrainNode, TerrainNode>, node: TerrainNode) {
+type TerrainNode = Node<Terrain> & Terrain;
+
+function reconstructPath(cameFrom: Map<Node, Node>, node: Node) {
   let length = 0;
   let current = node;
   while (cameFrom.has(current)) {
@@ -25,15 +27,11 @@ function reconstructPath(cameFrom: Map<TerrainNode, TerrainNode>, node: TerrainN
   return length;
 }
 
-function findPath(
-  start: TerrainNode,
-  goal: TerrainNode,
-  h: (node: TerrainNode, goal: TerrainNode) => number,
-): number {
-  const openSet: Array<TerrainNode> = [start];
-  const cameFrom: Map<TerrainNode, TerrainNode> = new Map();
-  const gScore: Map<TerrainNode, number> = new Map([[start, 0]]);
-  const fScore: Map<TerrainNode, number> = new Map([[start, h(start, goal)]]);
+function findPath<N extends Node>(start: N, goal: N, h: (node: N, goal: N) => number): number {
+  const openSet: Array<N> = [start];
+  const cameFrom: Map<N, N> = new Map();
+  const gScore: Map<N, number> = new Map([[start, 0]]);
+  const fScore: Map<N, number> = new Map([[start, h(start, goal)]]);
 
   while (openSet.length) {
     const current = openSet.reduce((min, node) => {
