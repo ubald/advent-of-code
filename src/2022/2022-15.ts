@@ -1,8 +1,5 @@
 import { fetchPuzzle } from '../utils/puzzle';
 
-type Packet = Array<Packet> | number;
-type Packets = Array<Packet>;
-
 export async function main(): Promise<void> {
   const input = await fetchPuzzle('2022', '15');
 
